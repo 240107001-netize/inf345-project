@@ -3,7 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 set +e
-out=$(mvn -B test 2>&1)
+out=$(mvn -B clean test 2>&1)
 code=$?
 set -e
 echo "$out"
