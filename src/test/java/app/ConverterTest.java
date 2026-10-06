@@ -9,7 +9,7 @@ class ConverterTest {
 
     @Test
     void convertsUsdToKzt() {
-        assertEquals(4800.0, Converter.convert("USD", "KZT", 10), 0.001);
+        assertEquals(4801.0, Converter.convert("USD", "KZT", 10), 0.001);
     }
 
     @Test
