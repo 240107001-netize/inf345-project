@@ -22,12 +22,14 @@ public class Main {
 
     static HttpServer create(int port) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+        String greeting = System.getenv().getOrDefault("GREETING", "hello");
         server.createContext("/healthz", ex -> send(ex, 200, "{\"status\":\"ok\"}"));
         server.createContext("/convert", Main::handleConvert);
         server.createContext("/", ex -> {
             if (ex.getRequestURI().getPath().equals("/")) {
                 send(ex, 200, "{\"service\":\"currency-converter\","
-                        + "\"usage\":\"/convert?from=USD&to=KZT&amount=10\"}");
+                    + "\"greeting\":\"" + escape(greeting) + "\","
+                    + "\"usage\":\"/convert?from=USD&to=KZT&amount=10\"}");
             } else {
                 send(ex, 404, "{\"error\":\"not found\"}");
             }
